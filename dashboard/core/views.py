@@ -1,5 +1,6 @@
-from django.shortcuts import render
-
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
 
 def home(request):
-    return render(request, 'core/index.html')
+    return redirect(reverse_lazy('admin:index'))
+    # return render(request, 'core/index.html')

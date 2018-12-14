@@ -51,10 +51,14 @@ EXTRA_APPS = [
     'test_without_migrations',
     'widget_tweaks',
     'django_extensions',
+    'corsheaders',
     'storages',
 ]
 
-PROJECT_APPS = []
+PROJECT_APPS = [
+    'dashboard.account.apps.AccountConfig',
+    'dashboard.job.apps.JobConfig',
+]
 
 INSTALLED_APPS += EXTRA_APPS
 INSTALLED_APPS += PROJECT_APPS
@@ -62,6 +66,7 @@ INSTALLED_APPS += PROJECT_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -182,10 +187,10 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'dashboard.api.v1.auth.TokenAuthenticate',
+        'dashboard.api.v1.account.TokenAuthenticate',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'dashboard.api.v1.auth.IsUserAuthenticated',
+        'dashboard.api.v1.account.IsUserAuthenticated',
     ),
     'NON_FIELD_ERRORS_KEY': '__all__',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',

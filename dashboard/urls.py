@@ -20,8 +20,8 @@ from django.urls import include
 from django.conf.urls.static import static
 
 # Admin customization.
-admin.site.site_header = 'Cosmun dashboard'
-admin.site.site_title = 'Cosmun dashboard'
+admin.site.site_header = 'Painel Administrativo'
+admin.site.site_title = 'Painel Administrativo'
 admin.site.index_title = 'Administração'
 
 

@@ -12,8 +12,10 @@ django-widget-tweaks
 django-extensions
 django-auditlog
 django-storages
+django-extra-fields
 boto3
 pytz
+Pillow
 
 # Django Rest Framework
 

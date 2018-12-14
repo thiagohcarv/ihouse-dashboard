@@ -25,6 +25,7 @@ class TokenAuthenticate(BasicAuthentication):
 
     ALLOWED_PATHS = [
         'login',
+        'register-user'
     ]
 
     def allowed_path(self, request):
@@ -41,7 +42,6 @@ class TokenAuthenticate(BasicAuthentication):
 
     def authenticate(self, request, simple=False):
         auth = get_authorization_header(request).split()
-
         if not auth and self.allowed_path(request):
             return self.authenticate_credentials(anonymous=True)
 
@@ -55,7 +55,6 @@ class TokenAuthenticate(BasicAuthentication):
 
         token, password = auth_parts[0], auth_parts[2]
         payload = self.verify_token(token)
-
         return self.authenticate_credentials(payload, password, request=request)
 
     def authenticate_credentials(self, payload=None, password=None, anonymous=False, request=None):

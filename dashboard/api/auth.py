@@ -25,6 +25,7 @@ class TokenAuthenticate(BasicAuthentication):
 
     ALLOWED_PATHS = [
         'login',
+        'login-register'
     ]
 
     def allowed_path(self, request):
