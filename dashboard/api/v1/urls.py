@@ -15,7 +15,8 @@ router.register('message', views_job.MessageViewSet, base_name='message')
 urlpatterns = [
     path('login/', views_account.UserViewSet.as_view({'post': 'login'}), name='login'),
     path('register/', views_account.UserViewSet.as_view({'post': 'register'}), name='register-user'),
-    path('register/<int:pk>/', views_account.UserViewSet.as_view({'put': 'update'}), name='update-user'),
+    path('user/', views_account.UserViewSet.as_view({'get': 'get'}), name='get-user'),
+    path('user/update/', views_account.UserViewSet.as_view({'put': 'update'}), name='update-user'),
 
     path('category/', views_job.CategoryViewSet.as_view({'get': 'get'}), name='category'),
     path('job/accept/<int:pk>/', views_job.JobViewSet.as_view({'patch': 'accept'}), name='accept-job'),

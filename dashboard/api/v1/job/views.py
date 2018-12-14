@@ -117,11 +117,16 @@ class MessageViewSet(viewsets.ModelViewSet):
         return Response(self.serializer_class_retrieve(self.get_queryset(), many=True).data, status=status.HTTP_200_OK)
 
     def create(self, request):
+        job = models.Job.objects.get(pk=request.data.get('job'))
         data = request.data.copy()
         if request.user.functionary:
-            data.update({'functionary': request.user.functionary.pk})
+            to_user = job.client.user.pk
+            data.update({'from_user': request.user.functionary.user.pk})
         else:
-            data.update({'client': request.user.client.pk})
+            to_user = job.functionary.user.pk
+            data.update({'from_user': request.user.client.user.pk})
+
+        data.update({'job': job.id, 'to_user': to_user})
 
         serializer = self.serializer_class(data=data)
 

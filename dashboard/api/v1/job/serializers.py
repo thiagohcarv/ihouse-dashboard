@@ -1,26 +1,8 @@
-import base64
 from rest_framework import serializers
-from drf_extra_fields.fields import Base64ImageField as Base64ImageFieldDRF
 
 from dashboard.job import models
+from dashboard.api.v1.base64imagefield import Base64ImageField
 from dashboard.api.v1.account import serializers as serializers_account
-
-class Base64ImageField(Base64ImageFieldDRF):
-
-    def to_representation(self, file):
-        if self.represent_in_base64:
-            try:
-                return base64.b64encode(file.read()).decode()
-            except Exception:
-                try:
-                    with open(file.path, 'rb') as f:
-                        return base64.b64encode(f.read()).decode()
-                except Exception:
-                    pass
-
-                raise IOError("Error encoding file")
-        else:
-            return super(Base64ImageField, self).to_representation(file)
 
 
 class ServiceSerializerRetrieve(serializers.ModelSerializer):
