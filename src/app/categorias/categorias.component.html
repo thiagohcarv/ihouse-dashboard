@@ -1,0 +1,56 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Image</th>
+      <th scope="col">Name</th>
+      <th scope="col">Value (USD)</th>
+      <th><button type="button" class="btn btn-button btn-info" data-toggle="modal" data-target="#exampleModal"><i class="material-icons">add</i></button></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cat of categories">
+      <th scope="row">{{ cat.id }}</th>
+      <td><img [src]="cat.img" width="100" alt=""></td>
+      <td>{{cat.name}}</td>
+      <td>{{cat.value}},00</td>
+      <td></td>
+    </tr>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+              <img [src]="base64textString | sanitizeHtml" width="200" height="200" alt="">
+          </div>
+          <div class="form-group">
+            <label for="img">Image:</label>
+            <input type="file" class="form-control input-sm" (change)="onChangeFile($event)" accept="image/png, image/jpeg">
+          </div>
+          <div class="form-group">
+            <label for="img">Name:</label>
+            <input type="text" class="form-control input-sm" [(ngModel)]="name">
+          </div>
+          <div class="form-group">
+            <label for="img">Valor:</label>
+            <input type="number" class="form-control input-sm" [(ngModel)]="value">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="save()" data-dismiss="modal" >Save</button>
+      </div>
+    </div>
+  </div>
+</div>

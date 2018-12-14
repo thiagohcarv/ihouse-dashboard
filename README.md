@@ -1,28 +1,27 @@
-# <README.md>
+# IhousePainel
 
-## Como desenvolver?
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
-1. Clone o repositório.
-2. Crie um virtualenv com Python 3.6
-3. Ative o virtualenv.
-4. Instale as dependências.
-5. Configure a instância com o .env
-6. Execute os testes.
-6. Execute o runserver.
+## Development server
 
-```console
-git clone
-cd ihouse-dashboard
-virtualenv env --python=python3 # python 3.6 ou mais atual
-source env/bin/activate
-pip install -r requirements_dev.txt
-cp contrib/env-sample .env
-coverage run --source='.' manage.py test -v 2 ; coverage report --show-missing
-python manage.py runserver
-```
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Qualidade do código
+## Code scaffolding
 
-```console
-flake8 --config=.flake8
-```
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

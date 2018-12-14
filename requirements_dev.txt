@@ -1,8 +1,0 @@
--r requirements.txt
-
-coverage
-django-coverage
-mock
-model-mommy
-flake8
-vcrpy

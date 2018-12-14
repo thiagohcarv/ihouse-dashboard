@@ -1,0 +1,19 @@
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Employee</th>
+        <th scope="col">Category</th>
+        <th scope="col">Has Acepted</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let j of jobs">
+        <th scope="row">{{j.timestamp}}</th>
+        <td>{{j.employee.name}}</td>
+        <td>{{j.category.name}}</td>
+        <td><span *ngIf="j.hasAccepted">Yes</span> <span *ngIf="!j.hasAccepted">No</span></td>
+      </tr>
+      
+    </tbody>
+  </table>

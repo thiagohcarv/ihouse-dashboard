@@ -1,0 +1,148 @@
+<div class="row">
+  <h4>Usuarios Bloqueados</h4>
+</div>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">SSN</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Type</th>
+      <th scope="col">Functions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let userB of usersBlocked">
+      <th scope="row">
+        <div class="round-img">
+          <img [src]="userB.urlPhoto | sanitizeHtml" width="150" alt="">
+        </div>
+      </th>
+      <td>{{userB.name}}</td>
+      <td>{{userB.ssn}}</td>
+      <td>{{userB.phone}}</td>
+      <td>{{userB.type}}</td>
+      <td>
+        <button type="button" (click)="unLock(userB)" class="btn btn-button btn-success"><i class="material-icons">lock_open</i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="row">
+  <h4>Todos</h4>
+</div>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">SSN</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Type</th>
+      <th scope="col">Functions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <th scope="row">
+        <div class="round-img">
+          <img [src]="user.urlPhoto | sanitizeHtml" width="150" alt="">
+        </div>
+      </th>
+      <td>{{user.name}}</td>
+      <td>{{user.ssn}}</td>
+      <td>{{user.phone}}</td>
+      <td>{{user.type}}</td>
+      <td>
+        <button type="button" (click)="lock(user)" class="btn btn-button btn-warning"><i class="material-icons">lock</i></button>
+        <button type="button" (click)="delete(user)" class="btn btn-button btn-danger"><i class="material-icons">delete_sweep</i></button>
+        <button type="button" (click)="view(user)" data-toggle="modal" data-target="#exampleModal" class="btn btn-button btn-success"><i class="material-icons">visibility</i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+ 
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{userSelected.name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="round-img">
+                  <img [src]="userSelected.urlPhoto | sanitizeHtml" width="150" alt="">
+                </div>
+              </div>
+              <div class="col-md-7 offset-1">
+                <div class="row">
+                  <h5>Type: </h5> {{userSelected.type}}
+                </div>
+                <div class="row">
+                  <h5>Phone: </h5> {{userSelected.phone}}
+                </div>
+                <div class="row">
+                  <h5>Address: </h5> {{userSelected.address}}
+                </div>
+                <div class="row">
+                  <h5>Type: </h5> {{userSelected.type}}
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="userSelected.skills.length > 0">
+              <br><br>
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Skill</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let s of userSelected.skills">
+                    <th>{{s.id | async}}</th>
+                    <th scope="row">
+                        <img [src]="s.img | sanitizeHtml | async" width="150" alt="">
+                    </th>
+                    <td>{{s.name | async}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row" *ngIf="jobsUser.length > 0">
+                <br><br>
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Has Acepted?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let j of jobsUser">
+                    <th>{{ j.timestamp | async}}</th>
+                    <th scope="row">{{ j.category | async}}</th>
+                    <td>{{j.hasAccepted | async }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
