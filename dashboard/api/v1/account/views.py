@@ -57,7 +57,7 @@ class UserViewSet(viewsets.ViewSet):
             data = request.data.copy()
             data.update({'user': user.pk})
 
-            if request.user.functionary:
+            if hasattr(request.user, 'functionary'):
                 serializer = self.serializer_class_functionary(instance=request.user.functionary, data=data)
             else:
                 serializer = self.serializer_class_client(instance=request.user.client, data=data)
@@ -69,7 +69,7 @@ class UserViewSet(viewsets.ViewSet):
         return Response({'errors': serializer_user.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request):
-        if request.user.functionary:
+        if hasattr(request.user, 'functionary'):
             user = models.Functionary.objects.get(pk=request.user.functionary.pk)
             context = self.serializer_class_functionary_retrieve(user).data
         else:

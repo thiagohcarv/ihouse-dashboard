@@ -33,7 +33,7 @@ class JobViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         if self.request.GET.get('category'):
             return models.Job.objects.filter(services__category__id=self.request.GET.get('category'), end_datetime__isnull=True).distinct()
-        elif self.request.user.functionary:
+        elif hasattr(self.request.user, 'functionary'):
             return models.Job.objects.filter(functionary=self.request.user.functionary)
         return models.Job.objects.filter(client=self.request.user.client)
 
@@ -63,7 +63,9 @@ class JobViewSet(viewsets.ModelViewSet):
         context = self.serializer_class_retrieve(job).data
         context['is_accept'] = False
         if job.functionary:
-            context['is_accept'] = job.functionary.pk == request.user.functionary.pk
+            context['is_accept'] = True
+            if hasattr(request.user, 'functionary'):
+                context['is_accept'] = job.functionary.pk == request.user.functionary.pk
         return Response(context, status=status.HTTP_200_OK)
 
     def partial_update(self, request, pk):
@@ -119,7 +121,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     def create(self, request):
         job = models.Job.objects.get(pk=request.data.get('job'))
         data = request.data.copy()
-        if request.user.functionary:
+        if hasattr(request.user, 'functionary'):
             to_user = job.client.user.pk
             data.update({'from_user': request.user.functionary.user.pk})
         else:
